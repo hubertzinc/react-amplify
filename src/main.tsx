@@ -13,8 +13,8 @@ Amplify.configure({
         oauth: {
           domain: 'hdamplify.auth.ap-southeast-2.amazoncognito.com',
           scopes: ['openid email phone profile aws.cognito.signin.user.admin '],
-          redirectSignIn: ['http://localhost:5173/','https://example.com/'],
-          redirectSignOut: ['http://localhost:5173/','https://example.com/'],
+          redirectSignIn: ['http://localhost:4310/','https://example.com/'],
+          redirectSignOut: ['http://localhost:4310/','https://example.com/'],
           responseType: 'code',
         },
         username: true,
