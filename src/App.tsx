@@ -1,26 +1,23 @@
-import { FC } from 'react'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { Authenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import { type AuthUser } from "aws-amplify/auth";
-import { type UseAuthenticator } from "@aws-amplify/ui-react-core";
+import viteLogo from '/vite.svg';
 
-
-type AppProps = {
-  signOut?: UseAuthenticator["signOut"]; //() => void;
-  user?: AuthUser;
-};
-
-const App: FC<AppProps> = ({ signOut, user }) => {
+const App = () => {
   return (
     <Authenticator>
       {({ signOut, user }) => (
         <div className="App bg-white">
-          <div>{user?.username}</div>
+          <header>
+            <img src={viteLogo} alt="Vite Logo" className="App-logo" />
+            <Heading level={1}>
+              <div>{user?.username}</div>
+              <div>{user?.signInDetails?.loginId}</div>
+            </Heading>
+          </header>
           <Button onClick={signOut}>Sign Out</Button>
         </div>
-        
+
       )}
     </Authenticator>
   );
