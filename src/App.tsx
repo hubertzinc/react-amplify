@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
@@ -18,7 +18,6 @@ const App: FC<AppProps> = ({ signOut, user }) => {
     <div className="App bg-white">
       <header className="App-header">
         <img src={viteLogo} className="App-logo" alt="vite logo" />
-
         <Heading level={1}>Hello {user?.username}</Heading>
         <Button onClick={signOut}>Sign out</Button>
         <h2>Amplify Todos</h2>

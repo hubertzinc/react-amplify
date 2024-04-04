@@ -1,4 +1,5 @@
-<!-- https://docs.amplify.aws/react/start/getting-started/auth/ -->
+https://docs.amplify.aws/react/start/getting-started/auth/
+https://www.youtube.com/watch?v=VjZLU2s3Q48
 
 # Amplify and Cognito React Auth
 ### Add Amplify.configure() to main.tsx

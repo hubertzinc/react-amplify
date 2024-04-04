@@ -7,14 +7,14 @@ import { Amplify } from 'aws-amplify';
 Amplify.configure({
   Auth: {
     Cognito: {
-      userPoolClientId: '56iv34do8ifj9111bdikdtlsia',
-      userPoolId: 'ap-southeast-2_4yJsIp9Jr',
+      userPoolClientId: '29hvg7h628crq4jnaque137cp5',
+      userPoolId: 'ap-southeast-2_pnaIVxuQw',
       loginWith: { // Optional
         oauth: {
-          domain: 'hdamplify.auth.ap-southeast-2.amazoncognito.com',
+          domain: 'https://zincstoreglobal.auth.ap-southeast-2.amazoncognito.com',
           scopes: ['openid email phone profile aws.cognito.signin.user.admin '],
-          redirectSignIn: ['http://localhost:5173/','https://example.com/'],
-          redirectSignOut: ['http://localhost:5173/','https://example.com/'],
+          redirectSignIn: ['http://localhost:4310/','https://example.com/'],
+          redirectSignOut: ['http://localhost:4310/','https://example.com/'],
           responseType: 'code',
         },
         username: true,
