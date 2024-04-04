@@ -24,3 +24,7 @@ const App = () => {
 }
 
 export default App;
+
+// Hosted UI URL: https://zincstoreglobal.auth.ap-southeast-2.amazoncognito.com/oauth2/authorize?client_id=29hvg7h628crq4jnaque137cp5&response_type=token&scope=email+openid&redirect_uri=https%3A%2F%2Flocalhost%3A4310
+
+// Fed Sign In Button Link: https://zincstoreglobal.auth.ap-southeast-2.amazoncognito.com/oauth2/authorize?identity_provider=azureadgranada&redirect_uri=https://localhost:4310&response_type=TOKEN&client_id=29hvg7h628crq4jnaque137cp5&scope=email%20openid
