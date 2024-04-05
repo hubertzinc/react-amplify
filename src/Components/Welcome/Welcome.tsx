@@ -12,7 +12,7 @@ const Welcome = () => {
 
   return (
     <>
-      <Title className={classes.title} ta="center" mt={100}>
+      <Title className={classes.title} ta="center" >
         Welcome to{' '}
         <Text inherit variant="gradient" component="span" gradient={{ from: 'pink', to: 'yellow' }}>
           ZincStore

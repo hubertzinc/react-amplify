@@ -18,20 +18,14 @@ import {
 } from '@tabler/icons-react';
 
 import classes from './Header.module.scss';
-import { AuthUser, fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
+import { fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
+import { IUser } from '../../Types/IUser';
 
 // const user = {
 //   name: 'Jane Spoonfighter',
 //   email: 'janspoon@fighter.dev',
 //   image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
 // };
-
-export interface IUser {
-  email: string;
-  id: string;
-  givenName: string;
-  familyName: string;
-}
 
 const Header = () => {
   const [opened, { toggle }] = useDisclosure(false);

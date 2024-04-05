@@ -5,29 +5,49 @@ import { Authenticator, type UseAuthenticator } from '@aws-amplify/ui-react';
 import { Button, Flex, MantineProvider, Space } from '@mantine/core';
 import FederatedSignInButton from './Components/FederatedSignInButton/FederatedSignInButton';
 import Home from './Pages/Home/Home';
-import { AuthUser } from 'aws-amplify/auth';
+import { AuthUser, FetchUserAttributesOutput, fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
 import Header from './Components/Header/Header';
+import { IUser } from './Types/IUser';
+import { useEffect, useState } from 'react';
 
 interface IAppProps {
   signOut?: UseAuthenticator['signOut'];
   user?: AuthUser
 }
 
-const App = (user: AuthUser) => {
+const App = () => {
 
+  const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
+  useEffect(() => {
+    getCurrentUser()
+      .then(response => {
+        console.log(response);
+      });
+
+    fetchUserAttributes()
+      .then((response: FetchUserAttributesOutput) => {
+        setCurrentUser({
+          email: response.email,
+          id: response.sub,
+          givenName: response.given_name,
+          familyName: response.family_name,
+          identities: JSON.parse(response.identities as string)
+        } as IUser);
+      })
+  }, []);
 
   return (
     <>
-      <MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles withNormalizeCSS>
+      <MantineProvider  >
         <Authenticator>
           {({ signOut, user } : IAppProps) => (
             <>
               {
-                user &&
+                currentUser &&
                 <>
                   <Header />
-                  <Home user={user} />
+                  <Home user={currentUser} />
 
                   <Space h="lg" />
                   <Flex justify="center">
@@ -49,7 +69,7 @@ const App = (user: AuthUser) => {
         </Authenticator>
 
         {
-          !user &&
+          !currentUser &&
           <Flex justify="center">
             <FederatedSignInButton />
           </Flex>

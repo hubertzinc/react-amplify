@@ -1,10 +1,12 @@
-import { AuthUser } from "aws-amplify/auth";
 import UserCard from "../../Components/UserCard/UserCard";
 import Welcome from "../../Components/Welcome/Welcome";
 import { Flex, Space } from "@mantine/core";
+import { IUser } from "../../Types/IUser";
+import UserDetails from "../../Components/UserDetails/UserDetails";
+import classes from "./Home.module.scss";
 
 export interface IHomeProps {
-  user: AuthUser;
+  user: IUser;
 }
 
 const Home = ({user}: IHomeProps) => {
@@ -12,8 +14,11 @@ const Home = ({user}: IHomeProps) => {
     <>
       <Welcome />
       <Space h="lg" />
-      <Flex justify="center">
-        <UserCard user={user} />
+      <Flex align="center" direction="column" justify="center" className={classes.items}>
+        <div className={classes.userCard}>
+          <UserCard user={user} />
+        </div>
+        <UserDetails user={user} />
       </Flex>
     </>
     
