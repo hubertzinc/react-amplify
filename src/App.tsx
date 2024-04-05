@@ -1,49 +1,66 @@
-import './App.css'
-import { Authenticator, Button, Heading } from '@aws-amplify/ui-react';
+import '@mantine/core/styles.css';
+import "./App.module.scss";
 import '@aws-amplify/ui-react/styles.css';
-import viteLogo from '/vite.svg';
-import { signInWithRedirect } from 'aws-amplify/auth';
+import { Authenticator, type UseAuthenticator } from '@aws-amplify/ui-react';
+import { Button, Flex, MantineProvider, Space } from '@mantine/core';
+import FederatedSignInButton from './Components/FederatedSignInButton/FederatedSignInButton';
+import Home from './Pages/Home/Home';
+import { AuthUser } from 'aws-amplify/auth';
+import Header from './Components/Header/Header';
 
-const App = () => {
+interface IAppProps {
+  signOut?: UseAuthenticator['signOut'];
+  user?: AuthUser
+}
+
+const App = (user: AuthUser) => {
+
+
+
   return (
     <>
-    <Authenticator>
-      {({ signOut, user  }) => (
-        <div className="App bg-white">
-          <header>
-            <img src={viteLogo} alt="Vite Logo" className="App-logo" />
-            <Heading level={1}>
-              <div>{user?.username}</div>
-              <div>{user?.signInDetails?.loginId}</div>
-            </Heading>
-          </header>
-          <Button onClick={signOut}>Sign Out</Button>
-        </div>
+      <MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles withNormalizeCSS>
+        <Authenticator>
+          {({ signOut, user } : IAppProps) => (
+            <>
+              {
+                user &&
+                <>
+                  <Header />
+                  <Home user={user} />
 
-      )}
-    </Authenticator>
-    <FederatedSignIn />
-    
+                  <Space h="lg" />
+                  <Flex justify="center">
+                    <Button onClick={signOut}>Sign Out</Button>
+                  </Flex>
+                  {/* <div className="App bg-white">
+                    <header>
+
+                      <Heading level={1}>
+                        <div>{user?.username}</div>
+                        <div>{user?.signInDetails?.loginId}</div>
+                      </Heading>
+                    </header>
+                  </div> */}
+                </>
+              }
+            </>
+          )}
+        </Authenticator>
+
+        {
+          !user &&
+          <Flex justify="center">
+            <FederatedSignInButton />
+          </Flex>
+        }
+
+
+      </MantineProvider>
+
     </>
   );
 }
-
-const FederatedSignIn = () => {
-  const handleEntraSignIn = async () => {
-    try {
-      const user = await signInWithRedirect({ provider: { custom: 'azuregranadaamplify' } });
-      console.log('User signed in with Entra ID:', user);
-      // Handle successful sign-in (e.g., navigate to a different page)
-    } catch (error) {
-      console.error('Error signing in with Entra ID:', error);
-      // Handle sign-in errors
-    }
-  };
-
-  return (
-    <button onClick={handleEntraSignIn}>Sign in with Entra ID</button>
-  );
-};
 
 
 export default App;

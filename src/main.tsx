@@ -15,11 +15,7 @@ Amplify.configure({
           scopes: ['openid email profile aws.cognito.signin.user.admin'],
           redirectSignIn: ['https://localhost:4310','https://example.com/'],
           redirectSignOut: ['https://localhost:4310','https://example.com/'],
-          responseType: 'code',
-          providers: ['Google','Facebook','Amazon','Apple', {
-            custom: 'azuregranadaamplify'
-          }],
-        },
+          responseType: 'code'        },
         username: true,
         email: false
       },
