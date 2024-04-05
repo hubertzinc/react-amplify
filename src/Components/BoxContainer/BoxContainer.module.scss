@@ -1,0 +1,28 @@
+.mainContainer {
+  padding: 1rem;
+  background-color: #2e2e2e;
+  border-radius: 0.4rem;
+  width: 80%;
+
+  .subContainer {
+    display: flex;
+    width: 100%;
+    padding: 1rem 5rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background-color: #242424;
+    border-radius: 0.4rem;
+  }
+
+  .header {
+    margin: 0.3rem 0 1rem 0;
+  }
+
+  .line {
+    height: 1px;
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    background-color: rgb(66, 66, 66);
+    margin-bottom: 0.7rem;
+  }
+}
