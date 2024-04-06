@@ -55,6 +55,9 @@ const App = () => {
   return (
     <>
       <MantineProvider>
+        {
+          !currentUser &&
+          <Space h="100" />        }
         <Authenticator>
           {() => (
             <>

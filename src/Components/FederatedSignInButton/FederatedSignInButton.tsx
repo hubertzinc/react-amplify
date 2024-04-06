@@ -14,7 +14,7 @@ const FederatedSignInButton = () => {
   };
 
   return (
-    <Button onClick={handleEntraSignIn} color="dark">Sign in with Entra ID</Button>
+    <Button onClick={handleEntraSignIn} mt="30" color="cyan" variant="outline">Sign in with Entra ID</Button>
     
   );
 };

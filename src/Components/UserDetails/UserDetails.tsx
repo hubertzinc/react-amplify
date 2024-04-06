@@ -109,6 +109,53 @@ const UserDetails = ({ user }: IUserDetailsProps) => {
           </Table>
         </BoxContainer>
       }
+
+      {userProfile && userProfile.shippingAddress &&
+        <BoxContainer title="Shipping Address">
+          <Table verticalSpacing="md">
+            <Table.Tbody>
+              <Table.Tr>
+                <Table.Td>
+                  <Text fz="sm">{userProfile.shippingAddress.firstName} {userProfile.shippingAddress.lastName}</Text>
+                  <Text fz="xs" c="dimmed">Name</Text>
+                </Table.Td>
+                <Table.Td>
+                  <Text fz="sm">{userProfile.shippingAddress.phone}</Text>
+                  <Text fz="xs" c="dimmed">Phone</Text>
+                </Table.Td>
+              </Table.Tr>
+              <Table.Tr>
+                <Table.Td>
+                  <Text fz="sm">{userProfile.shippingAddress.companyName}</Text>
+                  <Text fz="xs" c="dimmed">Company</Text>
+                </Table.Td>
+                <Table.Td>
+                  <Text fz="sm">{userProfile.shippingAddress.addressLine1}</Text>
+                  <Text fz="xs" c="dimmed">Address Line 1</Text>
+                </Table.Td>
+                <Table.Td>
+                  <Text fz="sm">{userProfile.shippingAddress.addressLine2}</Text>
+                  <Text fz="xs" c="dimmed">Address Line 2</Text>
+                </Table.Td>
+              </Table.Tr>
+              <Table.Tr>
+                <Table.Td>
+                  <Text fz="sm">{userProfile.shippingAddress.city}</Text>
+                  <Text fz="xs" c="dimmed">City</Text>
+                </Table.Td>
+                <Table.Td>
+                  <Text fz="sm">{userProfile.shippingAddress.state?.name}</Text>
+                  <Text fz="xs" c="dimmed">State</Text>
+                </Table.Td>
+                <Table.Td>
+                  <Text fz="sm">{userProfile.shippingAddress.country?.name}</Text>
+                  <Text fz="xs" c="dimmed">Country</Text>
+                </Table.Td>
+              </Table.Tr>
+            </Table.Tbody>
+          </Table>
+        </BoxContainer>
+      }
     </>
   );
 }
