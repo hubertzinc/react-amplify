@@ -5,43 +5,63 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import { Flex, MantineProvider, Space } from '@mantine/core';
 import FederatedSignInButton from './Components/FederatedSignInButton/FederatedSignInButton';
 import Home from './Pages/Home/Home';
-import { FetchUserAttributesOutput, fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
+import { FetchUserAttributesOutput, fetchAuthSession, fetchUserAttributes } from 'aws-amplify/auth';
 import Header from './Components/Header/Header';
 import { IUser } from './Types/IUser';
 import { useEffect, useState } from 'react';
+import { Hub } from 'aws-amplify/utils';
+
 
 const App = () => {
-
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
-  useEffect(() => {
-    getCurrentUser()
-      .then(response => {
-        console.log(response);
-      }).catch();
+  Hub.listen('auth', ({ payload }) => {
+    if (payload.event === "signedIn") {
+      if (currentUser) {
+        return;
+      }
 
-    fetchUserAttributes()
-      .then((response: FetchUserAttributesOutput) => {
-        setCurrentUser({
-          email: response.email,
-          id: response.sub,
-          givenName: response.given_name,
-          familyName: response.family_name,
-          identities: JSON.parse(response.identities as string)
-        } as IUser);
-      })
+      checkUserSignIn();
+    }
+  });
+
+  useEffect(() => {
+    checkUserSignIn();
   }, []);
+
+  const checkUserSignIn = async () => {
+    const session = await fetchAuthSession();
+
+    if (session.userSub) {
+      fetchUserAttributes()
+        .then((response: FetchUserAttributesOutput) => {
+          setCurrentUser({
+            email: response.email,
+            id: response.sub,
+            givenName: response.given_name,
+            familyName: response.family_name || "",
+            identities: response.identities ? JSON.parse(response.identities as string) : []
+          } as IUser);
+        })
+    }
+
+
+  }
+
+  const onSignOut = () => {
+    setCurrentUser(null);
+  }
 
   return (
     <>
-      <MantineProvider  >
+      <MantineProvider>
         <Authenticator>
           {() => (
             <>
               {
                 currentUser &&
                 <>
-                  <Header />
+                  <Header afterSignOut={onSignOut} />
                   <Home user={currentUser} />
                   <Space h="lg" />
                 </>

@@ -9,9 +9,9 @@ export class ApiService implements IApiService {
   private baseUrl: string = "https://localhost:6050";
 
   constructor() {
-    fetchAuthSession().then(res => {
-      console.log(res);
-    });
+    // fetchAuthSession().then(res => {
+    //   console.log(res);
+    // });
 
   }
 

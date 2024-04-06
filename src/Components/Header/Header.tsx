@@ -18,20 +18,19 @@ import {
 } from '@tabler/icons-react';
 
 import classes from './Header.module.scss';
-import { fetchUserAttributes, getCurrentUser, signOut } from 'aws-amplify/auth';
+import { fetchUserAttributes, signOut } from 'aws-amplify/auth';
 import { IUser } from '../../Types/IUser';
 
-const Header = () => {
+export interface IHeaderProps {
+  afterSignOut?: () => void;
+}
+
+const Header = ({afterSignOut} : IHeaderProps) => {
   const [opened, { toggle }] = useDisclosure(false);
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
-    getCurrentUser()
-      .then(response => {
-        console.log(response);
-      });
-
     fetchUserAttributes()
       .then(response => {
         setUser({
@@ -46,6 +45,7 @@ const Header = () => {
 
   const logOut = async () => {
     await signOut();
+    afterSignOut && afterSignOut();
   }
 
   return (

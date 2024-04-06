@@ -32,34 +32,47 @@ const UserDetails = ({ user }: IUserDetailsProps) => {
           <Table.Tbody>
             {
               user.identities.map((identity, index) => (
-                <>
-                  <Table.Tr key={index}>
-                    <Table.Td>
-                      <Text fz="sm">{identity.userId}</Text>
-                      <Text fz="xs" c="dimmed">Provider User ID</Text>
-                    </Table.Td>
-                    <Table.Td>
-                      <Text fz="sm">{identity.providerName}</Text>
-                      <Text fz="xs" c="dimmed">Provider</Text>
-                    </Table.Td>
-                    <Table.Td>
-                      <Text fz="sm">{identity.providerType}</Text>
-                      <Text fz="xs" c="dimmed">Type</Text>
-                    </Table.Td>
-                  </Table.Tr>
-                  <Table.Tr>
-                    <Table.Td>
-                      <Text fz="sm">{identity.issuer}</Text>
-                      <Text fz="xs" c="dimmed">Issuer</Text>
-                    </Table.Td>
-                    <Table.Td>
-                      <Text fz="sm">{user.id}</Text>
-                      <Text fz="xs" c="dimmed">Cognito User ID</Text>
-                    </Table.Td>
-                  </Table.Tr>
-                </>
+                <Table.Tr key={index}>
+                  <Table.Td>
+                    <Text fz="sm">{identity.userId}</Text>
+                    <Text fz="xs" c="dimmed">Provider User ID</Text>
+                  </Table.Td>
+                  <Table.Td>
+                    <Text fz="sm">{identity.providerName}</Text>
+                    <Text fz="xs" c="dimmed">Provider</Text>
+                  </Table.Td>
+                  <Table.Td>
+                    <Text fz="sm">{identity.providerType}</Text>
+                    <Text fz="xs" c="dimmed">Type</Text>
+                  </Table.Td>
+                  <Table.Td>
+                    <Text fz="sm">{identity.issuer}</Text>
+                    <Text fz="xs" c="dimmed">Issuer</Text>
+                  </Table.Td>
+                </Table.Tr>
               ))
             }
+
+            <Table.Tr>
+              <Table.Td>
+                <Text fz="sm">{user.id}</Text>
+                <Text fz="xs" c="dimmed">Cognito User ID</Text>
+              </Table.Td>
+              {
+                user.givenName &&
+                <Table.Td>
+                  <Text fz="sm">{user.givenName}</Text>
+                  <Text fz="xs" c="dimmed">First Name</Text>
+                </Table.Td>
+              }
+              {
+                user.familyName &&
+                <Table.Td>
+                  <Text fz="sm">{user.familyName}</Text>
+                  <Text fz="xs" c="dimmed" style={{ whiteSpace: 'nowrap' }}>Last Name</Text>
+                </Table.Td>
+              }
+            </Table.Tr>
           </Table.Tbody>
         </Table>
       </BoxContainer>
@@ -79,7 +92,7 @@ const UserDetails = ({ user }: IUserDetailsProps) => {
                 </Table.Td>
               </Table.Tr>
               <Table.Tr>
-              <Table.Td>
+                <Table.Td>
                   <Text fz="sm">{userProfile.userName}</Text>
                   <Text fz="xs" c="dimmed">ZincStore Username</Text>
                 </Table.Td>
