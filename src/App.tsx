@@ -1,19 +1,14 @@
 import '@mantine/core/styles.css';
 import "./App.module.scss";
 import '@aws-amplify/ui-react/styles.css';
-import { Authenticator, type UseAuthenticator } from '@aws-amplify/ui-react';
-import { Button, Flex, MantineProvider, Space } from '@mantine/core';
+import { Authenticator } from '@aws-amplify/ui-react';
+import { Flex, MantineProvider, Space } from '@mantine/core';
 import FederatedSignInButton from './Components/FederatedSignInButton/FederatedSignInButton';
 import Home from './Pages/Home/Home';
-import { AuthUser, FetchUserAttributesOutput, fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
+import { FetchUserAttributesOutput, fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
 import Header from './Components/Header/Header';
 import { IUser } from './Types/IUser';
 import { useEffect, useState } from 'react';
-
-interface IAppProps {
-  signOut?: UseAuthenticator['signOut'];
-  user?: AuthUser
-}
 
 const App = () => {
 
@@ -23,7 +18,7 @@ const App = () => {
     getCurrentUser()
       .then(response => {
         console.log(response);
-      });
+      }).catch();
 
     fetchUserAttributes()
       .then((response: FetchUserAttributesOutput) => {
@@ -41,27 +36,14 @@ const App = () => {
     <>
       <MantineProvider  >
         <Authenticator>
-          {({ signOut, user } : IAppProps) => (
+          {() => (
             <>
               {
                 currentUser &&
                 <>
                   <Header />
                   <Home user={currentUser} />
-
                   <Space h="lg" />
-                  <Flex justify="center">
-                    <Button onClick={signOut}>Sign Out</Button>
-                  </Flex>
-                  {/* <div className="App bg-white">
-                    <header>
-
-                      <Heading level={1}>
-                        <div>{user?.username}</div>
-                        <div>{user?.signInDetails?.loginId}</div>
-                      </Heading>
-                    </header>
-                  </div> */}
                 </>
               }
             </>

@@ -18,14 +18,8 @@ import {
 } from '@tabler/icons-react';
 
 import classes from './Header.module.scss';
-import { fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
+import { fetchUserAttributes, getCurrentUser, signOut } from 'aws-amplify/auth';
 import { IUser } from '../../Types/IUser';
-
-// const user = {
-//   name: 'Jane Spoonfighter',
-//   email: 'janspoon@fighter.dev',
-//   image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
-// };
 
 const Header = () => {
   const [opened, { toggle }] = useDisclosure(false);
@@ -49,6 +43,10 @@ const Header = () => {
         } as IUser);
       })
   }, [])
+
+  const logOut = async () => {
+    await signOut();
+  }
 
   return (
     <div className={classes.header}>
@@ -89,7 +87,7 @@ const Header = () => {
                 <Menu.Item
                   leftSection={
                     <IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-                  }>
+                  } onClick={logOut}>
                   Logout
                 </Menu.Item>
               </Menu.Dropdown>

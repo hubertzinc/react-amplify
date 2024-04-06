@@ -4,6 +4,7 @@ import { Flex, Space } from "@mantine/core";
 import { IUser } from "../../Types/IUser";
 import UserDetails from "../../Components/UserDetails/UserDetails";
 import classes from "./Home.module.scss";
+import StoresList from "../../Components/StoresList/StoresList";
 
 export interface IHomeProps {
   user: IUser;
@@ -19,6 +20,7 @@ const Home = ({user}: IHomeProps) => {
           <UserCard user={user} />
         </div>
         <UserDetails user={user} />
+        <StoresList user={user} />
       </Flex>
     </>
     
