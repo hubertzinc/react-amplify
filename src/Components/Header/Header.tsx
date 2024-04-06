@@ -69,7 +69,7 @@ const Header = ({afterSignOut} : IHeaderProps) => {
                 <UnstyledButton
                   className={cx(classes.user, { [classes.userActive]: userMenuOpened })}>
                   <Group gap={7}>
-                    <Avatar src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png" alt={user.email} radius="xl" size={20} />
+                    <Avatar src="https://cpng.pikpng.com/pngl/s/238-2387180_avatar-profile-png-icon-avatar-gamer-png-clipart.png" alt={user.email} radius="xl" size={35} />
                     <Stack className={classes.userStack}>
                       <Text fw={500} size="xs" lh={1} mr={3}>
                         {user.givenName} {user.familyName}
