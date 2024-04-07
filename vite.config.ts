@@ -14,8 +14,8 @@ export default defineConfig({
   },
   server: {
     https: {
-      key: "./localhost+home-key.pem",
-      cert: "./localhost+home.pem",
+      key: "./localhost+mac-key.pem",
+      cert: "./localhost+mac.pem",
     },
     port: 4310,
   },

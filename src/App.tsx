@@ -2,7 +2,7 @@ import '@mantine/core/styles.css';
 import "./App.module.scss";
 import '@aws-amplify/ui-react/styles.css';
 import { Authenticator } from '@aws-amplify/ui-react';
-import { Flex, MantineProvider, Space } from '@mantine/core';
+import { Flex, MantineProvider, Space, useMantineColorScheme } from '@mantine/core';
 import FederatedSignInButton from './Components/FederatedSignInButton/FederatedSignInButton';
 import Home from './Pages/Home/Home';
 import { FetchUserAttributesOutput, fetchAuthSession, fetchUserAttributes } from 'aws-amplify/auth';
@@ -27,6 +27,7 @@ const App = () => {
 
   useEffect(() => {
     checkUserSignIn();
+    // setColorScheme("dark");
   }, []);
 
   const checkUserSignIn = async () => {
@@ -57,7 +58,8 @@ const App = () => {
       <MantineProvider>
         {
           !currentUser &&
-          <Space h="100" />        }
+          <Space h="100" />
+        }
         <Authenticator>
           {() => (
             <>
