@@ -1,4 +1,4 @@
-import { Text, Table, } from '@mantine/core';
+import { Text, Table, Loader, } from '@mantine/core';
 import { IUser } from '../../Types/IUser';
 import BoxContainer from '../BoxContainer/BoxContainer';
 import { useEffect, useState } from 'react';
@@ -11,22 +11,28 @@ export interface IUserDetailsProps {
 
 const UserDetails = ({ user }: IUserDetailsProps) => {
   const apiService = new ApiService();
-
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    setLoading(true);
     apiService.get<IUserProfile>(`/user/${user.email}`)
       .then(userProfile => {
         setUserProfile(userProfile);
       }).catch(error => {
         console.log(error);
+      }).finally(() => {
+        setLoading(false);
       });
-
-
-  }, []);
+    }, []);
 
   return (
     <>
+      {loading && 
+        <BoxContainer title="Loading...">
+          <Loader />
+        </BoxContainer>
+      }
       <BoxContainer title="Details from Cognito">
         <Table verticalSpacing="md">
           <Table.Tbody>
