@@ -1,22 +1,16 @@
 import UserCard from "../../Components/UserCard/UserCard";
 import Welcome from "../../Components/Welcome/Welcome";
-import { Flex, Space, useMantineColorScheme } from "@mantine/core";
+import { Flex, Space } from "@mantine/core";
 import { IUser } from "../../Types/IUser";
 import UserDetails from "../../Components/UserDetails/UserDetails";
 import classes from "./Home.module.scss";
 import StoresList from "../../Components/StoresList/StoresList";
-import { useEffect } from "react";
 
 export interface IHomeProps {
   user: IUser;
 }
 
 const Home = ({user}: IHomeProps) => {
-  const { setColorScheme } = useMantineColorScheme();
-
-  useEffect(() => {
-    setColorScheme("dark");
-  }, []);
   
   return (
     <>
