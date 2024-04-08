@@ -10,6 +10,9 @@ import Header from './Components/Header/Header';
 import { IUser } from './Types/IUser';
 import { useEffect, useState } from 'react';
 import { Hub } from 'aws-amplify/utils';
+import AuthComponents from './Components/Auth/AuthComponents';
+import components from './Components/Auth/AuthComponents';
+
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
@@ -56,7 +59,7 @@ const App = () => {
           !currentUser &&
           <Space h="100" />
         }
-        <Authenticator>
+        <Authenticator components={components}>
           {() => (
             <>
               {
